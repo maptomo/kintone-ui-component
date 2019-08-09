@@ -26,7 +26,7 @@ class Text extends Control {
     }
     
     this.element = document.createElement('input');
-    this.element.className = 'kuc-input-text';
+    this.element.className = this._props.isMobile ? 'kuc-input-text-mobile' : 'kuc-input-text';
     this.element.setAttribute('type', 'text');
     if(this._props.value) {
       (this.element as HTMLInputElement).value = this._props.value;

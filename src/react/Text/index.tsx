@@ -8,9 +8,10 @@ type TextProps = {
   isVisible?: boolean;
   onChange?: (value: string | null) => void;
   onClick?: (e: React.SyntheticEvent<EventTarget>) => void;
+  isMobile?: boolean;
 }
 
-const Text = ({value, isDisabled = false, isVisible = true, onChange, onClick}: TextProps) => {
+const Text = ({value, isDisabled = false, isVisible = true, onChange, onClick, isMobile}: TextProps) => {
   const _onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange && onChange(event.target.value);
   };
@@ -18,12 +19,15 @@ const Text = ({value, isDisabled = false, isVisible = true, onChange, onClick}: 
   if (isVisible === false) {
     return null;
   }
+  const _getClassName = () => {
+    return isMobile ? 'kuc-input-text-mobile' : 'kuc-input-text';
+  };
 
   return (
     <input
       type="text"
       value={value}
-      className="kuc-input-text"
+      className={_getClassName()}
       onClick={onClick}
       onChange={_onChange}
       disabled={isDisabled}

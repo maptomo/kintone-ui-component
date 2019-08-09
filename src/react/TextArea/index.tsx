@@ -8,9 +8,10 @@ type TextAreaProps = {
   isDisabled: boolean;
   onClick: (e: any) => void;
   onChange: (e: any) => void;
+  isMobile?: boolean;
 }
 
-const TextArea = ({value, isVisible, isDisabled, onChange, onClick}: TextAreaProps) => {
+const TextArea = ({value, isVisible, isDisabled, onChange, onClick, isMobile}: TextAreaProps) => {
 
   const mixTextAreaWidth = 297;
   const mixtTextAreaHeight = 123;
@@ -64,11 +65,11 @@ const TextArea = ({value, isVisible, isDisabled, onChange, onClick}: TextAreaPro
 
   return (
     <div
-      className="kuc-textarea-outer"
+      className= {isMobile ? 'kuc-textarea-outer-mobile' : 'kuc-textarea-outer'}
     >
       <textarea
         value={value}
-        className="kuc-textarea"
+        className={isMobile ? 'kuc-textarea-mobile' : 'kuc-textarea'}
         onClick={onClick}
         onChange={_onChange}
         disabled={isDisabled}
@@ -78,7 +79,7 @@ const TextArea = ({value, isVisible, isDisabled, onChange, onClick}: TextAreaPro
         className="kuc-textarea-resize"
         style={{transform: `translate(${sizeConfig.translateX}px, ${sizeConfig.translateY}px)`}}
         onMouseDown={()=>{
-          setIsResizing(true);
+          !isMobile && setIsResizing(true);
         }}
       />
     </div>

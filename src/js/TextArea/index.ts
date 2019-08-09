@@ -59,7 +59,7 @@ class TextArea extends Control {
   }
 
   _onMouseDown =() => {
-      if (this._props.isDisabled) return;
+      if (this._props.isDisabled || this._props.isMobile) return;
     const eventMouseMove = document.onmousemove;
     const eventMouseUp = document.onmouseup;
     document.onmousemove = (event) => {
@@ -96,7 +96,7 @@ class TextArea extends Control {
 
   private createContainerEL() {
     const container = document.createElement('div')
-    container.className = 'kuc-textarea-outer'
+    container.className = this._props.isMobile ? 'kuc-textarea-outer-mobile' : 'kuc-textarea-outer'
 
     this.textAreaEl = this.createTextareaEL()
     container.appendChild(this.textAreaEl)
@@ -109,7 +109,7 @@ class TextArea extends Control {
 
   private createTextareaEL() {
     const textarea = document.createElement('textarea')
-    textarea.className = 'kuc-textarea'
+    textarea.className = this._props.isMobile ? 'kuc-textarea-mobile' : 'kuc-textarea'
     textarea.onclick = (e) => {this._onClick(e)}
     textarea.onchange = (e) => {
         this._props.value = (<HTMLInputElement>e.target).value

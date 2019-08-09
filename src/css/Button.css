@@ -55,3 +55,25 @@
     background-color: #1d6fa5;
     cursor: pointer;
 }
+
+.kuc-btn-mobile {
+    font-size: 1.4rem;
+    font-weight: 700;
+    display: block;
+    padding: 12px;
+    min-width: 100px;
+    line-height: 1;
+}
+
+.kuc-btn-mobile.submit {
+    border-radius: 6px;
+    border: solid 2px #206694;
+    background: #206694;
+    color: #fff;
+}
+
+.kuc-btn-mobile.normal {
+    border-radius: 6px;
+    border: solid 2px #206694;
+    color: #206694;
+}

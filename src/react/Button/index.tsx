@@ -9,12 +9,13 @@ type ButtonProps = {
   isDisabled?: boolean;
   isVisible?: boolean;
   onClick?: (e: React.SyntheticEvent<EventTarget>) => void;
+  isMobile?: boolean;
 }
 
-const Button = ({text, type, isDisabled, isVisible, onClick, style}: ButtonProps) => {
+const Button = ({text, type, isDisabled, isVisible, onClick, style, isMobile}: ButtonProps) => {
   const _getClassName = () => {
     return [
-      'kuc-btn',
+      isMobile ? 'kuc-btn-mobile' : 'kuc-btn',
       type === 'submit' ? 'submit' : 'normal'
     ].join(' ').trim();
   };

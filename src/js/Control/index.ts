@@ -1,6 +1,7 @@
 type ControlProps = {
   isDisabled?: boolean;
   isVisible?: boolean;
+  isMobile?: boolean;
 }
 
 class Control {

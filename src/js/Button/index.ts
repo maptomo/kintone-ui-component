@@ -68,7 +68,7 @@ class Button extends Control {
 
   private _getClassName() {
     return [
-      'kuc-btn',
+      this._props.isMobile ? 'kuc-btn-mobile' : 'kuc-btn',
       this._props.type === 'submit' ? 'submit' : 'normal'
     ].join(' ').trim();
   }
