@@ -33,7 +33,7 @@ class Item extends Control {
           this._props = {...this._props, ...params}
         }
     
-        this.element = document.createElement('span')
+        this.element = document.createElement(`${this._props.isMobile ? 'li' : 'span'}`)
         this.element.className = 'kuc-input-checkbox-item'
 
         const inputCheckboxElement = document.createElement('input')

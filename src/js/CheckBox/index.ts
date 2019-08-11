@@ -42,7 +42,7 @@ class CheckBox extends Control {
     }
 
     private _renderItemList() {
-        this.element = document.createElement('div')
+        this.element = document.createElement(`${this._props.isMobile ? 'ul' : 'div'}`)
         this.element.className = 'kuc-input-checkbox'
 
         if(this._props.items) {
@@ -50,7 +50,8 @@ class CheckBox extends Control {
                 let itemComponent = new Item({
                     ...item,
                     isSelected: this._props.value ? this._props.value.some(value => value === item.value) : false,
-                    onChange: this._handleItemChange.bind(this)
+                    onChange: this._handleItemChange.bind(this),
+                    isMobile: this._props.isMobile
                 })
                 this.itemList.push(itemComponent)
                 this.element.appendChild(itemComponent.render())
