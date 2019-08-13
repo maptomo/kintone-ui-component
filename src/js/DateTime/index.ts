@@ -131,7 +131,7 @@ class DateTime extends Control {
   private _renderDateTextInput() {
     const dateTextInput = document.createElement('input');
     dateTextInput.type = 'text';
-    dateTextInput.className = 'kuc-input-text text-input';
+    dateTextInput.className = this._props.isMobile ? '' : 'kuc-input-text text-input';
     if(this._props.value && this._props.dateFormat) {
       dateTextInput.value = format(this._props.value, this._props.dateFormat);
     }
@@ -341,7 +341,7 @@ class DateTime extends Control {
 
   private _renderDate() {
     const dateContainer = document.createElement('div');
-    dateContainer.className = 'date-container';
+    dateContainer.className = this._props.isMobile ? 'date-container-mobile' : 'date-container';
     // render date text input
     this._renderDateTextInput();
     // render date input error
@@ -354,7 +354,8 @@ class DateTime extends Control {
       date: this._props.value,
       onClickOutside: this._onClickOutside,
       onDateClick: this._onCalendarDateClick,
-      locale: this._locale
+      locale: this._locale,
+      isMobile: true
     });
     dateContainer.appendChild(calendar.render());
     this._calendar = calendar;
@@ -365,15 +366,32 @@ class DateTime extends Control {
 
   private _renderTime() {
     const timeContainer = document.createElement('div');
-    timeContainer.className = 'time-container';
-    // render time text input
-    this._renderTimeTextInput();
-    timeContainer.appendChild(this._timeTextInput);
+    timeContainer.className = this._props.isMobile ? 'time-containe-mobile' : 'time-container';
 
-    // render time picker
-    const timePicker = new TimePicker({onTimeClick: (date) => this._onTimeClick(date)});
-    this._timePicker = timePicker;
-    timeContainer.appendChild(timePicker.render());
+    if (this._props.isMobile) {
+      const hourPicker = new TimePicker({onHourChange: (hours) => {this._time.setHours(hours)}, isMobile: true, mode: 'hour', hour: this._time.getHours()});
+      timeContainer.appendChild(hourPicker.render());
+      hourPicker.show();
+
+      const span = document.createElement('span');
+      span.textContent = ':';
+      timeContainer.appendChild(span);
+
+      const minutePicker = new TimePicker({onMinuteChange: (minutes) => {this._time.setMinutes(minutes)}, isMobile: true, mode: 'minute', minute: this._time.getMinutes()});
+      timeContainer.appendChild(minutePicker.render());
+      minutePicker.show();
+
+    } else {
+      // render time text input
+      this._renderTimeTextInput();
+      timeContainer.appendChild(this._timeTextInput);
+      // render time picker
+      const timePicker = new TimePicker({onTimeClick: (date) => this._onTimeClick(date), isMobile: true});
+      this._timePicker = timePicker;
+      timeContainer.appendChild(timePicker.render());
+    }
+
+
     this.element.appendChild(timeContainer);
 
     return this.element;

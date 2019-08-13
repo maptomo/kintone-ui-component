@@ -22,6 +22,7 @@ class NotifyPopup extends Control {
   private textEl: any
   private closeButton: IconButton
   private _onClick = (e: Event) => {}
+  notifyMesage: HTMLDivElement;
 
   constructor(params: PopupProps) {
     super();
@@ -51,7 +52,7 @@ class NotifyPopup extends Control {
         break;
       default:
         style.bgClass = 'bg-danger';
-        style.color = 'red';
+        style.color = this._props.isMobile ? 'transparent' : 'red';
     }
     return style;
   }
@@ -59,13 +60,27 @@ class NotifyPopup extends Control {
   private _createPopupLayout() {
     const containerDOM = document.createElement('div');
 
-    this.textEl = elements(document.createElement('div')).addClass('kuc-notify-title').appendTo(containerDOM);
+    this.textEl = elements(document.createElement('div'))
+
+    if (this._props.isMobile) {
+      const notifyBody = document.createElement('ul');
+
+      const notifyMesage = document.createElement('li');
+
+      notifyBody.appendChild(notifyMesage);
+      containerDOM.appendChild(notifyBody);
+
+      this.textEl.appendTo(notifyMesage)
+    } else {
+      this.textEl.addClass('kuc-notify-title')
+      this.textEl.appendTo(containerDOM)
+    }
     this.textEl.on('click', (e: Event) => {
       if (this._props.isDisabled) return;
       this._onClick(e)
     })
 
-    this.closeButton = new IconButton({type: 'close'});
+    this.closeButton = new IconButton({type: 'close', color: 'transparent'});
 
     elements(document.createElement('div')).addClass('kuc-close-button').appendTo(containerDOM).append(this.closeButton.render());
 
@@ -77,11 +92,32 @@ class NotifyPopup extends Control {
   }
 
   private _getClassName() {
+    if (this._props.isMobile) {
+      return 'kuc-notify-mobile';
+    }
+
     const className = [
       'kuc-notify',
       this._getStyleByType().bgClass
     ];
     return className.join(' ').trim();
+  }
+
+  show() {
+    if (this._props.isMobile) {
+      this.element.setAttribute('style', 'top: 0');
+      this.element.setAttribute('transition', '5s ease')
+    } else {
+      this.show();
+    }
+  }
+
+  hide() {
+    if (this._props.isMobile) {
+      this.element.setAttribute('style', 'top: -1000px');
+    } else {
+      this.show();
+    }
   }
 
   rerender(changedAttr?: string[]) {

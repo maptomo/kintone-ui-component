@@ -61,3 +61,63 @@
     color: #bababa;
     cursor: not-allowed;
 }
+
+.kuc-input-checkbox-mobile {
+    padding: 0;
+    margin: .4em;
+    list-style: none;
+    background-color: #fff;
+    border: 1px solid #b3b3b3;
+    box-shadow: 0 1px 0 #fff;
+    border-radius: .4em;
+    box-sizing: border-box;
+    
+}
+
+.kuc-input-checkbox-mobile li {
+    margin: 0;
+    border-bottom: 1px solid #b3b3b3;
+    border-radius: .4em .4em 0 0;
+    position: relative;
+    outline: 0;
+}
+
+.kuc-input-checkbox-mobile li input[type=checkbox] {
+    box-sizing: border-box;
+    padding: 0;
+    position: absolute;
+    top: 40%;
+    left: 15px;
+    visibility: hidden;
+}
+
+.kuc-input-checkbox-mobile li input[type=checkbox] + label {
+    position: relative;
+    display: block;
+    padding: 1em 1em 1em 2.2em;
+    margin-left: .8em;
+}
+.kuc-input-checkbox-mobile li input[type=checkbox] + label .kuc-checkbox-mobile-icon{
+    position: absolute;
+    top: 50%;
+    left: 3px;
+    display: block;
+    margin-top: -13px;
+    width: 25px;
+    height: 25px;
+    background-size: 22px 17px;
+}
+.kuc-input-checkbox-mobile li input[type=checkbox] + label .kuc-checkbox-mobile-icon svg{
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 24px;
+    height: 24px;
+}
+.kuc-input-checkbox-mobile li input[type=checkbox] + label .kuc-checkbox-mobile-icon svg path{
+    fill: #E6E6E6;
+}
+
+.kuc-input-checkbox-mobile li input[type=checkbox]:checked + label .kuc-checkbox-mobile-icon svg path{
+    fill: #4C4C4C
+}

@@ -198,7 +198,12 @@ const timeList12H = [
 type TimePickerProps = ControlProps & {
   timeIntervals?: number;
   timeFormat?: string;
+  mode?:string;
+  hour?:number;
+  minute?: number;
   onTimeClick?: (date: Date) => void;
+  onMinuteChange?:(minute: number) => void;
+  onHourChange?:(hour: number) => void;
 }
 
 class TimePicker extends Control {
@@ -221,25 +226,82 @@ class TimePicker extends Control {
   }
 
   private _renderTimePickerSelections() {
-    timeList12H.forEach((timeObj) => {
-      const span = document.createElement('span');
-      span.className = 'kuc-time-list-item';
-      span.textContent = timeObj.label;
-      span.tabIndex = 1;
-      span.onclick = (e) => {
-        const tempDate = new Date();
+    const maxMinute = 60;
+    const maxHour = 24;
+    
+    const selectHourEl = document.createElement('select');
+    selectHourEl.onchange = () => {
+      const selectedValue = selectHourEl.options[selectHourEl.selectedIndex].value;
+      if (this._props.onHourChange) {
+        this._props.onHourChange(parseInt(selectedValue))
+      }
+    }
+    const selectMinuteEl = document.createElement('select');
+    selectMinuteEl.onchange = () => {
+      const hours = selectMinuteEl.options[selectMinuteEl.selectedIndex].value;
+      if (this._props.onMinuteChange) {
+        this._props.onMinuteChange(parseInt(hours))
+      }
+    }
+    if (this._props.isMobile) {
+      for (let i = 0; i < maxMinute; i++) {
+        if (i < maxHour) {
+          const hourOption = document.createElement('option');
+          hourOption.value = i + '';
+          hourOption.textContent = this.getHourLabel(i)
+          hourOption.defaultSelected = (i === this._props.hour)
+          selectHourEl.appendChild(hourOption);
+        }
+        const minuteOption = document.createElement('option');
+        minuteOption.textContent = i + '';
+        minuteOption.defaultSelected = (i === this._props.minute)
+        selectMinuteEl.appendChild(minuteOption);
+      }
+       if (this._props.mode === 'hour') {
+        this.element = selectHourEl;
+       } else {
+        this.element = selectMinuteEl;
+       }
+    } else {
+      timeList12H.forEach((timeObj) => {
+        const span = document.createElement('span');
+        span.className = 'kuc-time-list-item';
+        span.textContent = timeObj.label;
+        span.tabIndex = 1;
+        span.onclick = (e) => {
+
         const hour = parseInt(timeObj.value.split(':')[0], 10);
         const minute = parseInt(timeObj.value.split(':')[1], 10);
-        tempDate.setHours(hour);
-        tempDate.setMinutes(minute);
-        tempDate.setSeconds(0)
-        if (this._props.onTimeClick) {
-          this._props.onTimeClick(tempDate);
-        }
+        this.setSelectTime(hour, minute);
       };
-      // render button
-      this.element.appendChild(span);
-    });
+          this.element.appendChild(span);
+      });
+    }
+  }
+
+  setSelectTime(hour: number, minute: number) {
+    const tempDate = new Date();
+    tempDate.setHours(hour);
+    tempDate.setMinutes(minute);
+    tempDate.setSeconds(0)
+    if (this._props.onTimeClick) {
+      this._props.onTimeClick(tempDate);
+    }
+  }
+
+  getHourLabel(hour:number){
+    const halfDayHour= 12; 
+    const absoluteHour = hour - halfDayHour;
+    if (hour == 0) {
+      return 'AM ' + halfDayHour;
+    }
+
+    if (absoluteHour < 0) {
+      return 'AM ' + ((hour < 10) ? `0${hour}`: hour);
+    } if (absoluteHour > 0) {
+      return 'PM ' + (absoluteHour < 10 ? `0${absoluteHour}`: hour);
+    }
+    return 'PM ' + halfDayHour;
   }
 
   render() {

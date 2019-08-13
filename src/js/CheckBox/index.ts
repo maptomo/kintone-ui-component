@@ -43,7 +43,7 @@ class CheckBox extends Control {
 
     private _renderItemList() {
         this.element = document.createElement(`${this._props.isMobile ? 'ul' : 'div'}`)
-        this.element.className = 'kuc-input-checkbox'
+        this.element.className = `kuc-input-checkbox${this._props.isMobile ? '-mobile' : ''}`
 
         if(this._props.items) {
             this._props.items.forEach((item: ItemData, index:number) => {

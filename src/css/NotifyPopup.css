@@ -42,3 +42,44 @@
     border: rgba(255, 255, 255, 0.5);
     background-color: rgba(255, 255, 255, 0.5);
 }
+
+.kuc-notify-mobile {
+    position: fixed;
+    top: -1000px;
+    left: 0;
+    background-color: #ffffcf;
+    width: 100%;
+    min-height: 48px;
+    z-index: 20;
+    background: linear-gradient(#ffda4a,#ffc32c);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 14px;
+    text-shadow: rgba(255,255,255,.5) 0 1px 0;
+    color: #333;
+    text-align: center;
+}
+
+.kuc-notify-mobile ul{
+    display: inline-block;
+    min-height: 28px;
+    list-style: none;
+    padding: 17px 44px 3px 44px;
+    margin: 0;
+}
+
+.kuc-notify-mobile ul li{  
+    display: table-cell;
+    min-height: 42px;
+    vertical-align: middle;
+}
+
+.kuc-close-button {
+    background-size: 12px 12px;
+    background-position: center center;
+    position: absolute;
+    right: 0;
+    top: 5px;
+    width: 44px;
+    height: 48px;
+}

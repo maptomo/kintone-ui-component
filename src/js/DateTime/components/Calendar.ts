@@ -6,6 +6,8 @@ import {getWeekDayLabels,
   isSameDate,
   parseStringToDate
 } from '../../../react/DateTime/components/utils';
+
+import {mdiArrowLeft, mdiArrowRight} from '@mdi/js'
 import {ja, format} from '../../../react/DateTime/components/Locale';
 import Locale from '../../../react/DateTime/components/localizationData/locale-dto';
 import Control, {ControlProps} from '../../Control';
@@ -47,7 +49,7 @@ class Calendar extends Control {
 
   _renderCalendarContainer() {
     const calendarContainer = document.createElement('div');
-    calendarContainer.className = 'date-picker-container';
+    calendarContainer.className = this._props.isMobile ? 'date-picker-container-mobile' : 'date-picker-container';
     calendarContainer.style.display = this._props.isVisible ? 'block' : 'none';
     calendarContainer.tabIndex = 0;
     this.element = calendarContainer;
@@ -67,7 +69,18 @@ class Calendar extends Control {
 
   _renderPreviousButton() {
     const span = document.createElement('span');
-    span.className = 'prev calendar-button-control';
+    
+    if (this._props.isMobile) {
+
+      span.className = 'prev-month-mobile';
+      const pathEl = document.createElementNS('http://www.w3.org/2000/svg','path')
+      pathEl.setAttribute('d',mdiArrowLeft)
+      const iconPreEl = document.createElementNS('http://www.w3.org/2000/svg','svg')
+      iconPreEl.appendChild(pathEl);
+      span.appendChild(iconPreEl);
+    } else {
+      span.className = 'calendar-button-control';
+    }
     span.onclick = () => {
       this._displayDate.setMonth(this._displayDate.getMonth() - 1);
       this.rerender(['selectedDate']);
@@ -86,7 +99,17 @@ class Calendar extends Control {
 
   _renderNextButton() {
     const span = document.createElement('span');
-    span.className = 'next calendar-button-control';
+    if (this._props.isMobile) {
+      span.className = 'next-month-mobile';
+      const pathEl = document.createElementNS('http://www.w3.org/2000/svg','path')
+      pathEl.setAttribute('d',mdiArrowRight)
+      const iconPreEl = document.createElementNS('http://www.w3.org/2000/svg','svg')
+      iconPreEl.appendChild(pathEl);
+      span.appendChild(iconPreEl);
+    } else {
+      span.className = 'prev calendar-button-control';
+    }
+
     span.onclick = () => {
       this._displayDate.setMonth(this._displayDate.getMonth() + 1);
       this.rerender(['selectedDate']);
@@ -102,7 +125,7 @@ class Calendar extends Control {
 
   _renderQuickSelectionsContainer() {
     const div = document.createElement('div');
-    div.className = 'quick-selections-container';
+    div.className = this._props.isMobile ? 'quick-selections-container-mobile' : 'quick-selections-container';
     this._quickSelectionsContainer = div;
   }
 

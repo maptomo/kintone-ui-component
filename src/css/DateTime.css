@@ -52,7 +52,7 @@
 }
 
 .date-time-container .month-year-container,
-.date-time-container .quick-selections-container {
+.date-time-container .quick-selections-container, .quick-selections-container-mobile {
   position: relative;
   line-height: 16px;
   height: 32px;
@@ -126,12 +126,28 @@
   cursor: pointer;
 }
 
-.date-time-container .quick-selections-container .today {
+.date-time-container .quick-selections-container-mobile .today,
+.date-time-container .quick-selections-container-mobile .none {
+  position: absolute;
+  top: 10px;
+  color: #206694;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.date-time-container .quick-selections-container .today,
+.date-time-container .quick-selections-container-mobile .today {
   left: 0;
 }
 
-.date-time-container .quick-selections-container .none {
+.date-time-container .quick-selections-container .none,
+.date-time-container .quick-selections-container-mobile .none {
   right: 0;
+}
+
+.date-time-container .quick-selections-container-mobile .none,
+.date-time-container .quick-selections-container-mobile .today {
+  font-weight: bold
 }
 
 .date-time-container .days-container {
@@ -215,4 +231,85 @@ span.day {
   background-color: transparent;
   border: none;
   outline: none;
+}
+
+.date-container-mobile {
+  padding-right: 10px;
+}
+
+.date-container-mobile input {
+  font: 90% "メイリオ",Meiryo,"Hiragino Kaku Gothic ProN","ヒラギノ角ゴ ProN W3","ＭＳ Ｐゴシック","Lucida Grande","Lucida Sans Unicode",Arial,Verdana,sans-serif;
+}
+
+.date-container-mobile input[type="text"] {
+  text-align: left;
+  width: 130px;
+  border-radius: .4em;
+  background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTE5LDRIMThWMkgxNlY0SDhWMkg2VjRINUMzLjg5LDQgMyw0LjkgMyw2VjIwQTIsMiAwIDAsMCA1LDIySDE5QTIsMiAwIDAsMCAyMSwyMFY2QTIsMiAwIDAsMCAxOSw0TTE5LDIwSDVWMTBIMTlWMjBNMTksOEg1VjZIMTlWOFoiIC8+PC9zdmc+");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 24px 24px;
+  padding: .4em;
+  border: 1px solid #b3b3b3;
+  outline: 0;
+  box-shadow: 0 1px 0 #fff, inset 0 2px 3px #dadada;
+  border-radius: .4em;
+  box-sizing: border-box;
+  height: 40px;
+}
+
+.date-container-mobile .month-year-container .prev-month-mobile svg{
+  position: absolute;
+    left: 4px;
+    width: 24px;
+    height: 24px;
+    fill: #206694;
+}
+
+.date-container-mobile .month-year-container .next-month-mobile svg{
+    position: absolute;
+    right: 4px;
+    width: 24px;
+    height: 24px;
+    fill: #206694;
+}
+
+.time-containe-mobile {
+  display: inline-block;
+  background-color: #fff;
+  border: 1px solid #b3b3b3;
+  border-radius: .4em;
+  box-sizing: border-box;
+  box-shadow: 0 1px 0 #fff, inset 0 2px 3px #dadada;
+}
+
+.time-containe-mobile select {
+  padding: 1em .6em;
+  background-color: transparent;
+  border: none;
+  -webkit-appearance: none;
+}
+
+.date-time-container .date-picker-container-mobile {
+  position: absolute;
+  width: 290px;
+  background: #fff;
+  padding-top: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+  font-size: 13px;
+  box-sizing: border-box;
+  z-index: 2000;
+  text-align: center;
+  border: 1px solid #d8d8d8;
+  font: 13px/1.231 "メイリオ",Meiryo,"Hiragino Kaku Gothic ProN","ヒラギノ角ゴ ProN W3","ＭＳ Ｐゴシック","Lucida Grande","Lucida Sans Unicode",Arial,Verdana,sans-serif;
+}
+
+.date-picker-container-mobile .days-container .day{
+  width: 40px;
+  height: 40px;
+}
+.date-picker-container-mobile .days-container .day.selected {
+  border: 1px solid #206694;
 }

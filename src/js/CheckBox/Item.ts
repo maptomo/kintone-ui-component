@@ -1,4 +1,5 @@
 import Control, {ControlProps} from '../Control';
+import {mdiCheckBold} from '@mdi/js'
 
 import '../../css/Item.css';
 
@@ -34,7 +35,7 @@ class Item extends Control {
         }
     
         this.element = document.createElement(`${this._props.isMobile ? 'li' : 'span'}`)
-        this.element.className = 'kuc-input-checkbox-item'
+        this.element.className = `kuc-input-checkbox-item${this._props.isMobile ? '-mobile' : ''}`
 
         const inputCheckboxElement = document.createElement('input')
         const inputCheckboxID = new Date().getTime() + '-' + this.generateGUID() + '-' + this.generateGUID()
@@ -48,7 +49,25 @@ class Item extends Control {
 
         const labelForCheckboxElement = document.createElement('label')
         labelForCheckboxElement.htmlFor = inputCheckboxID;
-        labelForCheckboxElement.append(this._props.label)
+        if (this._props.isMobile) {
+
+            const checkboxLabel = document.createElement('span')
+            checkboxLabel.append(this._props.label)
+            labelForCheckboxElement.appendChild(checkboxLabel);
+
+            const pathEl = document.createElementNS('http://www.w3.org/2000/svg','path')
+            pathEl.setAttribute('d',mdiCheckBold)
+            const iconEl = document.createElementNS('http://www.w3.org/2000/svg','svg')
+            iconEl.appendChild(pathEl);
+
+            const checkboxIcon = document.createElement('span')
+            checkboxIcon.className = 'kuc-checkbox-mobile-icon'
+            checkboxIcon.appendChild(iconEl)
+            labelForCheckboxElement.appendChild(checkboxIcon);
+
+        } else {
+            labelForCheckboxElement.append(this._props.label)
+        }
         this.element.appendChild(labelForCheckboxElement)
         
         this.inputCheckboxElement.addEventListener('change', (e) => {
