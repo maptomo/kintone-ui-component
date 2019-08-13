@@ -80,7 +80,7 @@ class NotifyPopup extends Control {
       this._onClick(e)
     })
 
-    this.closeButton = new IconButton({type: 'close', color: 'transparent'});
+    this.closeButton = new IconButton({type: 'close', color: this._props.isVisible ? 'transparent': undefined});
 
     elements(document.createElement('div')).addClass('kuc-close-button').appendTo(containerDOM).append(this.closeButton.render());
 
@@ -108,7 +108,7 @@ class NotifyPopup extends Control {
       this.element.setAttribute('style', 'top: 0');
       this.element.setAttribute('transition', '5s ease')
     } else {
-      this.show();
+      super.show();
     }
   }
 
@@ -116,7 +116,7 @@ class NotifyPopup extends Control {
     if (this._props.isMobile) {
       this.element.setAttribute('style', 'top: -1000px');
     } else {
-      this.show();
+      super.hide();
     }
   }
 

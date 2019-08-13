@@ -1,4 +1,5 @@
 import React from 'react';
+
 import '../../css/font.css'
 import '../../css/NotifyPopup.css';
 import IconButton from '../IconButton/index';
@@ -6,13 +7,14 @@ import IconButton from '../IconButton/index';
 type NotifyPopupProps = {
   text?: string;
   type?: string;
+  isMobile: string;
   isDisabled?: boolean;
   isVisible?: boolean;
   onClick?: () => void;
   onClose?: () => void;
 }
 
-const NotifyPopup = ({text, type, isDisabled, isVisible, onClick, onClose}: NotifyPopupProps) => {
+const NotifyPopup = ({text, type, isDisabled, isVisible, onClick, onClose, isMobile}: NotifyPopupProps) => {
   const _handleClosePopup = () => {
     if (isDisabled) {
       return false;
@@ -37,12 +39,16 @@ const NotifyPopup = ({text, type, isDisabled, isVisible, onClick, onClose}: Noti
         break;
       default:
         style.bgClass = 'bg-danger';
-        style.color = 'red';
+        style.color = 'red' ;
     }
     return style;
   };
 
   const _getClassName = () => {
+    if (isMobile) {
+      return 'kuc-notify-mobile';
+    }
+
     const className = [
       'kuc-notify',
       _getStyleByType().bgClass
@@ -63,12 +69,16 @@ const NotifyPopup = ({text, type, isDisabled, isVisible, onClick, onClose}: Noti
   }
 
   return (
-    <div className={_getClassName()}>
-      <div className="kuc-notify-title" onClick={_onClick} >{text}</div>
-      <div className="kuc-close-button">
-        <IconButton onClick={_handleClosePopup} type="close" color={_getStyleByType().color} />
+      <div className={_getClassName() + (isVisible && ' show')}>
+        <div className={isMobile ? '' : 'kuc-notify-title'} onClick={_onClick}>
+          {
+            isMobile ? <ul><li>{text}</li></ul> : text
+          }
+        </div>
+        <div className="kuc-close-button">
+          <IconButton onClick={_handleClosePopup} type="close" color={isMobile ? 'transparent' : _getStyleByType().color} />
+        </div>
       </div>
-    </div>
   );
 };
 

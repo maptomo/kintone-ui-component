@@ -59,6 +59,10 @@
     color: #333;
     text-align: center;
 }
+.show {
+    top: 0;
+    transition: 5s ease;
+}
 
 .kuc-notify-mobile ul{
     display: inline-block;
