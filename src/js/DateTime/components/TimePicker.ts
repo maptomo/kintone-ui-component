@@ -253,7 +253,7 @@ class TimePicker extends Control {
           selectHourEl.appendChild(hourOption);
         }
         const minuteOption = document.createElement('option');
-        minuteOption.textContent = i + '';
+        minuteOption.textContent = (i < 10) ? `0${i}`: `${i}`;
         minuteOption.defaultSelected = (i === this._props.minute)
         selectMinuteEl.appendChild(minuteOption);
       }
