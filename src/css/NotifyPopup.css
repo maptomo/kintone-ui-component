@@ -46,9 +46,8 @@
 .kuc-notify-mobile {
     position: fixed;
     top: -1000px;
-    left: 0;
     background-color: #ffffcf;
-    width: 100%;
+    width: 100vw;
     min-height: 48px;
     z-index: 20;
     background: linear-gradient(#ffda4a,#ffc32c);

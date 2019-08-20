@@ -94,7 +94,7 @@
 .kuc-input-checkbox-mobile li input[type=checkbox] + label {
     position: relative;
     display: block;
-    padding: 1em 1em 1em 2.2em;
+    padding: 1em 1em 1em 3em;
     margin-left: .8em;
 }
 .kuc-input-checkbox-mobile li input[type=checkbox] + label .kuc-checkbox-mobile-icon{
@@ -109,7 +109,6 @@
 }
 .kuc-input-checkbox-mobile li input[type=checkbox] + label .kuc-checkbox-mobile-icon svg{
     position: absolute;
-    top: 4px;
     left: 4px;
     width: 24px;
     height: 24px;
