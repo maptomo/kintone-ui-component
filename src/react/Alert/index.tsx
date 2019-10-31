@@ -22,7 +22,7 @@ const Alert = ({text, type, isVisible, onClick}: AlertProps) => {
     onClick && onClick(e);
     return true;
   };
-
+  
   if (isVisible === false) {
     return null;
   }

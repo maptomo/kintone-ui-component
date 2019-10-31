@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "paths": {
+      "@/*": ["*"]
+    },
     "outDir": "esm",
     "module": "es6",
     "target": "es5",
