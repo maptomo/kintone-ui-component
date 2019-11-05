@@ -1,45 +1,12 @@
 module.exports = {
-
-  // Automatically clear mock calls and instances between every test
-  clearMocks: true,
-
-  coverageDirectory: "coverage",
-
-  // An array of regexp pattern strings used to skip coverage collection
-  coveragePathIgnorePatterns: [
-    "<rootDir>/node_modules/(?!@foo)"
-  ],
-
-  globals: {
-    "ts-jest": {
-      "tsConfigFile": "tsconfig.json",
-      "enableTsDiagnostics": true
-    }
-  },
-
-  moduleFileExtensions: [
-    "ts",
-    "tsx",
-    "js"
-  ],
-
-  // A map from regular expressions to module names that allow to stub out resources with a single module
-  moduleNameMapper: {
-    "@/(.*)": "<rootDir>/src/$1",
-    "database": "<rootDir>/src/lib/database"
-  },
-
-  testEnvironment: "node",
-
-  testRegex: "(/tests/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-  "roots": [
-    "<rootDir>/src"
-  ],
+  verbose: true,
+  
   transform: {
-    "^.+\\.(ts|tsx)$": "ts-jest"
+    "^.+\\.tsx?$": "ts-jest",
+    ".+\\.(css|style)$": "jest-transform-css"
   },
 
-  transformIgnorePatterns: [
-    "<rootDir>/node_modules/(?!@foo)"
-  ]
+  setupFilesAfterEnv: ["@testing-library/react/cleanup-after-each", "@testing-library/jest-dom/extend-expect"],
+
+  moduleFileExtensions: ["tsx", "js", "ts"]
 };

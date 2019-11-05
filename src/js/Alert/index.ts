@@ -32,7 +32,7 @@ class Alert extends Control<AlertProps> {
 
   rerender(changedAttr?: string[]) {
     super.rerender();
-
+    
     if (!changedAttr) return;
     if (changedAttr.indexOf('text') !== -1) {
       this.element.innerHTML = this._props.text || '';

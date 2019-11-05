@@ -19,7 +19,6 @@ import AbstractMultiSelection from './utils/AbstractMultiSelection';
 import TextArea from './TextArea';
 import Attachment from './Attachment';
 import FieldGroup from './FieldGroup';
-
 export {
   DateTime,
   Calendar,

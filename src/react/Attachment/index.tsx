@@ -8,7 +8,7 @@ type FileObject = {
   size?: number;
 }
 
-type AttachmentProps = {
+ export type AttachmentProps = {
   dropZoneText?: string;
   browseButtonText?: string;
   fileLimitText?: string;
@@ -21,7 +21,7 @@ type AttachmentProps = {
 };
 
 
-const Attachment = (props: AttachmentProps) => {
+const Attachment = (props: AttachmentProps) => {  
   if (props.isVisible === false) {
     return null;
   }
@@ -38,12 +38,13 @@ const Attachment = (props: AttachmentProps) => {
     }
   };
 
-  const _addFiles = (event: any) => {
+  const _addFiles = (event: any) => {    
     if (props.onFilesAdd && props.files) {
-      let addedFiles = event.dataTransfer ? event.dataTransfer.files : event.target.files;
+      let addedFiles = event.dataTransfer ? event.dataTransfer.files : event.target.files; 
       addedFiles = Object.keys(addedFiles).map((e) => {
         return addedFiles[e];
-      });
+      });      
+      
       props.onFilesAdd([...props.files, ...addedFiles]);
     }
   };
@@ -147,6 +148,7 @@ const Attachment = (props: AttachmentProps) => {
             ref={(dropElement) => {
               if (dropElement) dropZoneElement = dropElement;
             }}
+            data-testid="drop-file"
           >
             {props.dropZoneText || 'Drop files here.'}
           </div>
@@ -166,6 +168,7 @@ const Attachment = (props: AttachmentProps) => {
           <span className="kuc-attachment-file-upload-button-text"> {props.browseButtonText || 'Browse'}</span>
           <div className="kuc-attachment-file-upload-html5">
             <input
+              data-testid="file"
               type="file"
               multiple
               ref={(element) => {
@@ -175,6 +178,7 @@ const Attachment = (props: AttachmentProps) => {
                 inputElement.value = '';
               }}
               onChange={_addFiles}
+
             />
           </div>
         </a>
