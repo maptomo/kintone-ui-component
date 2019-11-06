@@ -19,7 +19,9 @@ type CheckBoxProps = {
 
 const CheckBox = (props: CheckBoxProps) => {
   const {_hasDuplicatedItems, _hasValidValue} = AbstractMultiSelection;
-  const _handleItemClick = (itemValue: string) => {
+  const _handleItemClick = (itemValue: string) => {    
+    console.log("click");
+    
     const value = props.value ? props.value.slice() : [];
     const length = value.length;
     let include = false;
@@ -40,15 +42,15 @@ const CheckBox = (props: CheckBoxProps) => {
     return null;
   }
 
-  const items = props.items.map((item, i) => {
-    const isSelected = props.value ? props.value.some(value => value === item.value) : false;
+  const items = props.items.map((item, i) => {    
+    const isSelected = props.value ? props.value.some(value => value === item.value) : false;    
     return (
       <Item
         key={i}
         selected={isSelected}
         onChange={() => _handleItemClick(item.value)}
         // label={item.label}
-        item={item}
+        item={item} 
         isDisabled={props.isDisabled ? props.isDisabled : item.isDisabled}
         type="checkbox"
         className="kuc-input-checkbox-item"

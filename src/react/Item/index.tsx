@@ -59,8 +59,9 @@ const Item = (props: ItemProps) => {
           type={props.type}
           checked={props.selected}
           onChange={_onChange}
+          data-testid="onChange-item"
         />
-        <label htmlFor={id}>{props.item.label || ''}
+        <label data-testid="label-item" htmlFor={id}>{props.item.label || ''}
         </label>
       </span>
     );
@@ -76,7 +77,7 @@ const Item = (props: ItemProps) => {
           <path d={mdiCheckBold} />
         </svg>
       </span>
-      <span className="kuc-list-item-label">{props.item.label || ''}</span>
+      <span className="kuc-list-item-label" >{props.item.label || ''}</span>
     </div>
   );
 };
