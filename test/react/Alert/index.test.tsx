@@ -4,7 +4,7 @@ import { render,fireEvent } from "@testing-library/react";
 import Alert from "../../../src/react/Alert";
 describe("<Alert/>", () => {
   test("render type success", () => {
-    const { container } = render(<Alert type="success" />);
+    const { container } = render(<Alert type="success" />);    
     if (container.firstElementChild) {
       expect(container.firstElementChild.className).toBe("kuc-alert bg-success");
     }

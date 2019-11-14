@@ -24,7 +24,4 @@ describe("<Attachment/>", () => {
     fireEvent.change(domInputFile, { target: { files: [fakeFile] } });
     expect(onFilesAdd).toHaveBeenCalledWith([fakeFile]);
   });
-  test("drag and drop file", async () => {
-    let { findByTestId } = renderAttachment({});
-  });
 });
