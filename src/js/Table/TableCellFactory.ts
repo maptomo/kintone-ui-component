@@ -19,7 +19,7 @@ const createTableCell = (type: string, fieldName: string, props: any = {}) => {
   if (!fieldName) {
     throw new Error(Message.common.INVALID_ARGUMENT);
   }
-  const init = ({updateRowData, rowIndex, table}: any) => {
+  const init = ({ updateRowData, rowIndex, table }: any) => {
     switch (type) {
       case 'text':
         FieldComponent = Text;
@@ -49,7 +49,7 @@ const createTableCell = (type: string, fieldName: string, props: any = {}) => {
       default:
         break;
     }
-    field = new FieldComponent({...table.data[rowIndex][fieldName], ...props});
+    field = new FieldComponent({ ...table.data[rowIndex][fieldName], ...props });
     // return DOM
     const dom = field.render();
     // assign listeners
@@ -62,7 +62,16 @@ const createTableCell = (type: string, fieldName: string, props: any = {}) => {
           // if has custom on change call it
           if (props && props.onChange) {
             const data = table.data;
-            props.onChange({data, rowIndex, fieldName});
+            props.onChange({ data, rowIndex, fieldName });
+          }
+        });
+        field.on('click', (e: Event) => {
+          const rowData = JSON.parse(JSON.stringify(table.data[rowIndex]));
+          rowData[fieldName].value = (e.target as HTMLInputElement).value;
+          updateRowData(rowData, false, true, fieldName);
+          if (props && props.onClick) {
+            const data = table.data;
+            props.onClick({ data, rowIndex, fieldName });
           }
         });
         break;
@@ -77,7 +86,20 @@ const createTableCell = (type: string, fieldName: string, props: any = {}) => {
           // if has custom on change call it
           if (props && props.onChange) {
             const data = table.data;
-            props.onChange({data, rowIndex, fieldName});
+            props.onChange({ data, rowIndex, fieldName });
+          }
+        });
+        break;
+      case 'icon':
+      case 'alert':
+      case 'label':
+        field.on('click', (e: Event) => {
+          const rowData = JSON.parse(JSON.stringify(table.data[rowIndex]));
+          rowData[fieldName].value = (e.target as HTMLInputElement).value;
+          updateRowData(rowData, false, true, fieldName);
+          if (props && props.onClick) {
+            const data = table.data;
+            props.onClick({ data, rowIndex, fieldName });
           }
         });
         break;
@@ -86,7 +108,7 @@ const createTableCell = (type: string, fieldName: string, props: any = {}) => {
     }
     return dom;
   };
-  const update = ({rowData}: any) => {
+  const update = ({ rowData }: any) => {
     const cellData = rowData[fieldName] || {};
     if (cellData && field.setValue) {
       field.setValue(cellData.value);
@@ -98,6 +120,6 @@ const createTableCell = (type: string, fieldName: string, props: any = {}) => {
       field.setText(cellData.text);
     }
   };
-  return new TableCell({init, update});
+  return new TableCell({ init, update });
 };
 export default createTableCell;
